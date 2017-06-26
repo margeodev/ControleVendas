@@ -14,7 +14,7 @@ public class CadastroPedidosBean {
 	
 	public CadastroPedidosBean(){
 		itens = new ArrayList<>();
-		for(int i = 0; i<50; i++){
+		for(int i = 0; i<2; i++){
 			itens.add(i);
 		}
 	}

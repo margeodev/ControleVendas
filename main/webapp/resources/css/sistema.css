@@ -70,16 +70,15 @@ h1 {
 
 .ui-selectmanycheckbox td {
 	border-width: 0px !important;
-	padding: 0px !important;	
+	padding: 0px !important;
 }
 
-.ui-selectmanycheckbox td label{
-	padding-right: 15px;	
-	padding-left: 5px;
+.ui-selectmanycheckbox td label {
+	padding-right: 10px;
 }
 
 .produto-tabela input {
-	width:99%;
+	width: 99%;
 }
 
 /* Customiza TabView - início */
@@ -99,3 +98,19 @@ h1 {
     padding: 0px !important;
 }
 /* Customiza TabView - fim */
+
+/* Menu sistema inicio */
+.menu-sistema {
+    border: 0px !important;
+    padding: 0px !important;
+    background: none !important;
+}
+
+.menu-sistema .ui-menu-parent > a .ui-menuitem-text, .menu-sistema > .ui-menu-list > .ui-menuitem > a > .ui-menuitem-text {
+    color: #ffffff !important;
+}
+
+.menu-sistema .ui-icon-triangle-1-s {
+    background: url(#{resource['images:seta-para-baixo.png']}) no-repeat;
+}
+/* Menu sistema fim */
