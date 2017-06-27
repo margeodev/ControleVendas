@@ -9,8 +9,8 @@
 
 	<ui:define name="corpo">
 		<h1>Novo pedido</h1>
-		<p:messages autoUpdate="true"/>
-		<form>
+		<p:messages autoUpdate="true" closable="true"/>
+		<h:form>
 			<ui:include src="/WEB-INF/template/pedidos/BotoesPedido.xhtml" />
 			<ui:include src="/WEB-INF/template/pedidos/CapaPedido.xhtml" />
 			
@@ -28,6 +28,6 @@
 	    		</p:tab>
 	    	</p:tabView>
 			
-		</form>
+		</h:form>
 	</ui:define>
 </ui:composition>
