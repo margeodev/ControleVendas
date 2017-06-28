@@ -17,6 +17,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import validation.SKU;
+
 @Entity
 @Table(name="produtos")
 public class Produto implements Serializable {
@@ -51,7 +53,7 @@ public class Produto implements Serializable {
 		this.nome = nome;
 	}
 
-	@NotBlank
+	@NotBlank @SKU
 	@Column(nullable = false, length = 20, unique = true)
 	public String getSku() {
 		return sku;
