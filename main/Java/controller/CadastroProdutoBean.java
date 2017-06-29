@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ViewScoped;
@@ -11,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import model.Categoria;
 import model.Produto;
 import repository.Categorias;
+import service.CadastroProdutoService;
 import utils.jsf.FacesUtil;
 
 @Named
@@ -21,6 +23,9 @@ public class CadastroProdutoBean implements Serializable {
 
 	@Inject
 	private Categorias categorias;
+	
+	@Inject
+	private CadastroProdutoService cadastroProdutoService;
 	
 	private Categoria categoriaPai;	
 	private Produto produto;	
@@ -41,10 +46,19 @@ public class CadastroProdutoBean implements Serializable {
 	}
 	
 	public CadastroProdutoBean() {
-		produto = new Produto();
+		limpar();
 	}
 	
 	public void salvar() {
+		produto = cadastroProdutoService.salvar(produto);
+		limpar();
+		FacesUtil.addInfoMessage("Produto salvo com sucesso.");
+	}
+	
+	private void limpar(){
+		produto = new Produto();
+		categoriaPai = null;
+		subcategorias = new ArrayList<>();
 	}
 
 	public Produto getProduto() {
