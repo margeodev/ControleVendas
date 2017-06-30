@@ -1,12 +1,20 @@
 package repository;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
+
+import filter.ProdutoFilter;
 import model.Produto;
 
 public class Produtos implements Serializable {
@@ -28,5 +36,20 @@ public class Produtos implements Serializable {
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Produto> filtrados(ProdutoFilter filter){
+		Session session = manager.unwrap(Session.class);
+		Criteria criteria = session.createCriteria(Produto.class);
+		
+		if(StringUtils.isNotBlank(filter.getSku())){
+			criteria.add(Restrictions.eq("sku", filter.getSku()));
+		}
+		if(StringUtils.isNotBlank(filter.getNome())){
+			criteria.add(Restrictions.ilike("nome", filter.getNome(), MatchMode.ANYWHERE));
+		}
+		
+		return criteria.addOrder(Order.asc("nome")).list();
 	}
 }
