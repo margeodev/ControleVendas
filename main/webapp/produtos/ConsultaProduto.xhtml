@@ -58,7 +58,9 @@
     			</p:column>
     			
     			<p:column headerText="Ações" style="text-align:center; width: 100px">
-    				<p:button icon="ui-icon-pencil" title="Editar"/>
+    				<p:button outcome="/produtos/CadastroProduto" icon="ui-icon-pencil" title="Editar">
+    					<f:param value="#{produto.id}" name="produto" />
+    				</p:button>
     				<p:commandButton icon="ui-icon-trash" title="Excluir"/>    				
     			</p:column>
     		</p:dataTable>
