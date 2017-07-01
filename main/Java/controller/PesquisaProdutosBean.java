@@ -11,6 +11,7 @@ import javax.inject.Named;
 import filter.ProdutoFilter;
 import model.Produto;
 import repository.Produtos;
+import utils.jsf.FacesUtil;
 
 @Named
 @ViewScoped
@@ -20,6 +21,8 @@ public class PesquisaProdutosBean implements Serializable {
 	
 	@Inject
 	private Produtos produtos;
+	
+	private Produto produtoSelecionado;
 	private ProdutoFilter filtro;	
 	private List<Produto> produtosFiltrados;
 	
@@ -30,6 +33,12 @@ public class PesquisaProdutosBean implements Serializable {
 	
 	public void pesquisar() {
 		produtosFiltrados = produtos.filtrados(filtro);
+	}
+	
+	public void excluir(){
+		produtos.remover(produtoSelecionado);
+		produtosFiltrados.remove(produtoSelecionado);
+		FacesUtil.addInfoMessage("Produto "+produtoSelecionado.getSku()+" excluído com sucesso.");
 	}
 	
 	public List<Produto> getProdutosFiltrados(){
@@ -43,5 +52,13 @@ public class PesquisaProdutosBean implements Serializable {
 	public void setFiltro(ProdutoFilter filtro) {
 		this.filtro = filtro;
 	}
-		
+
+	public Produto getProdutoSelecionado() {
+		return produtoSelecionado;
+	}
+
+	public void setProdutoSelecionado(Produto produtoSelecionado) {
+		this.produtoSelecionado = produtoSelecionado;
+	}
+				
 }

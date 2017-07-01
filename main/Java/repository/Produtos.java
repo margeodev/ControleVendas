@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceException;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
@@ -15,8 +16,9 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import filter.ProdutoFilter;
-import model.Categoria;
 import model.Produto;
+import service.NegocioException;
+import utils.jpa.Transactional;
 
 public class Produtos implements Serializable {
 	
@@ -27,6 +29,19 @@ public class Produtos implements Serializable {
 	
 	public Produto guardar(Produto produto) {		
 		return manager.merge(produto);
+	}
+	
+	@Transactional
+	public void remover(Produto produto){
+		try {
+			produto = porId(produto.getId());
+			manager.remove(produto);
+			manager.flush();
+		} catch (PersistenceException e) {
+			throw new NegocioException("Produto não pode ser excluído.");
+		}
+		
+		
 	}
 	
 	public Produto porSku(String sku) {
